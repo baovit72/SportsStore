@@ -1,0 +1,42 @@
+﻿@model ProductsListViewModel
+@{
+    ViewBag.Title = "Place Import Order";
+    Layout = "_AdminLayout";
+}
+
+<div class="row m-1 p-1">
+    <div class="col">
+        @foreach (var p in Model.Products)
+        {
+            @await Html.PartialAsync("ImportItemSummary", p);
+        }
+        <div class="card card-outline-primary m-1 p-1">
+            <div class="bg-faded p-1">
+                <h4>
+                    Add new product
+                </h4>
+                <p class="card-text">
+                    Add a new product if isn't already available.
+                </p>
+                <a asp-action="Create"
+                   asp-controller="Admin"
+                   class="btn btn-primary pull-right">Add Product</a>
+            </div>
+        </div>
+        <div class="row">
+             <div page-model="@Model.PagingInfo"
+             page-action="PlaceOrder"
+             page-classes-enabled="true"
+             page-class="btn"
+             page-class-normal="btn-secondary"
+             page-class-selected="btn-primary"
+             page-url-category="@Model.CurrentCategory"
+             class="btn-group pull-right m-1 col-auto">
+            </div>
+             <div class="col text-right">
+                 @await Component.InvokeAsync("ImportItemsSummary")
+             </div>
+        </div>
+        
+    </div>
+</div>

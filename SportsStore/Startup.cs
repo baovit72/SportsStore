@@ -41,10 +41,13 @@ namespace SportsStore
             services.AddTransient<IProductRepository, EFProductRepository>();
             //specifies that the same object should be used for Cart instances request
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddScoped<ImportItems>(sp => SessionImportItems.GetImportItems(sp));
             //use the HttpContextAccessor class when implementations of the IHttpContextAccessor interface are required
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //Registering the Order Repository Service
-            services.AddTransient<IOrderRepository, EFOrderRepository>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>(); 
+            services.AddTransient<IImportOrderRepository, EFImportOrderRepository>();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
