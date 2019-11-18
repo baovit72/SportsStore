@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SportsStore.Controllers
 {
+    [Authorize]
     public class ImportController : Controller
     {
         private IImportOrderRepository repository;
@@ -23,28 +24,27 @@ namespace SportsStore.Controllers
             this.productRepo = productRepo;
             importItems = importItemsService;
         }
-        // Done
         public ViewResult Index() => View(repository.ImportOrders);
         public ViewResult PlaceOrder(string category, int productPage = 1) 
             => View(new ProductsListViewModel
-        {
-            //LinQ select product 
-            Products = productRepo.Products
-                 .Where(p => category == null || p.Category == category)
-                 .OrderBy(p => p.ProductID)
-                 .Skip((productPage - 1) * PageSize)
-                 .Take(PageSize),
-            PagingInfo = new PagingInfo
             {
-                CurrentPage = productPage,
-                ItemsPerPage = PageSize,
-                //LinQ show number of product in a category
-                TotalItems = category == null ? productRepo.Products.Count()
-                    : productRepo.Products.Where(e => e.Category == category).Count()
-            }
-        });
+                //LinQ select product 
+                Products = productRepo.Products
+                     .Where(p => category == null || p.Category == category)
+                     .OrderBy(p => p.ProductID)
+                     .Skip((productPage - 1) * PageSize)
+                     .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    //LinQ show number of product in a category
+                    TotalItems = category == null ? productRepo.Products.Count()
+                        : productRepo.Products.Where(e => e.Category == category).Count()
+                }
+            });
         [HttpPost]
-        public IActionResult PlaceOrder()
+        public IActionResult PlaceOrder(string returnUrl)
         {
             //Use ModelState to show error in Checkout
             if (importItems.Lines.Count() == 0)
@@ -56,14 +56,15 @@ namespace SportsStore.Controllers
             {
                 ImportOrder importOrder = new ImportOrder(importItems);
                 repository.SaveOrder(importOrder);
+                importItems.Clear();
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(null);
+                TempData["error"] = "Sorry, your order is empty!";
+                return RedirectToAction("Details", new { returnUrl });
             }
         }
-        // Doing
         public RedirectToActionResult AddToOrder(int productId, string returnUrl)
         {
             Product product = productRepo.Products
@@ -82,7 +83,28 @@ namespace SportsStore.Controllers
                 ReturnUrl = returnUrl
             });
         }
-        // Need to do
-        public ViewResult RemoveFromOrder() => View();
+        [HttpPost]
+        public IActionResult MarkDelivered(int importOrderID)
+        {
+            ImportOrder importOrder = repository.ImportOrders
+                .FirstOrDefault(o => o.ImportOrderID == importOrderID);
+            if (importOrder != null)
+            {
+                importOrder.Received = true;
+                repository.SaveOrder(importOrder);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        public RedirectToActionResult RemoveFromOrder(int productId,
+            string returnUrl)
+        {
+            Product product = productRepo.Products
+                .FirstOrDefault(p => p.ProductID == productId);
+            if (product != null)
+            {
+                importItems.RemoveLine(product);
+            }
+            return RedirectToAction("Details", new { returnUrl });
+        }
     }
 }

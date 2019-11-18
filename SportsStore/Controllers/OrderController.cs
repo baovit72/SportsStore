@@ -21,7 +21,7 @@ namespace SportsStore.Controllers
         //applies the authorization policy to all the action methods it contains
         [Authorize]
         public ViewResult List() =>
-            View(repository.Orders.Where(o => !o.Shipped));
+            View(repository.Orders);
 
         //POST request that specifies the ID of an order so that set Shipped and saved
         [HttpPost]

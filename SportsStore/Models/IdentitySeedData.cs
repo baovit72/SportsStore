@@ -17,7 +17,7 @@ namespace SportsStore.Models
         //{
         //    // UserManager<T> is a service by ASP.NET Core Identity for managing users
         //    UserManager<IdentityUser> userManager = app.ApplicationServices
-        //    .GetRequiredService<UserManager<IdentityUser>>();
+        //      .GetRequiredService<UserManager<IdentityUser>>();
         //    IdentityUser user = await userManager.FindByIdAsync(adminUser);
         //    if (user == null)
         //    {

@@ -26,6 +26,7 @@ namespace SportsStore.Models
         {
             Lines = importItems.Lines.ToArray();
             Sum = importItems.ComputeTotalValue();
+            Received = false;
         }
     }
     public class WholeSalerInfo

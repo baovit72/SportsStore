@@ -3,6 +3,7 @@
     ViewBag.Title = "Place Import Order";
     Layout = "_AdminLayout";
 }
+<div asp-validation-summary="All" class="text-danger"></div>
 <h2>Current Order</h2>
 <table class="table table-bordered table-striped">
     <thead>
@@ -24,7 +25,7 @@
                     @((line.Quantity * line.Product.Price).ToString("c"))
                 </td>
                 <td>
-                    <form asp-action="RemoveFromCart" method="post">
+                    <form asp-action="RemoveFromOrder" method="post">
                         <input type="hidden" name="ProductID"
                                value="@line.Product.ProductID" />
                         <input type="hidden" name="returnUrl"
@@ -46,15 +47,19 @@
         </tr>
     </tfoot>
 </table>
-<div class="text-center">
-    <a class="btn btn-primary" href=@Model.ReturnUrl>
-        Continue adding products
-    </a>
-    <form asp-action="PlaceOrder"
-          asp-controller="Import"
-          method="post">
-        <div class="text-center">
-            <input class="btn btn-primary" type="submit" value="Complete Order" />
-        </div>
-    </form>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <a class="btn btn-primary m-1" href=@Model.ReturnUrl>
+            Continue adding products
+        </a>
+        <form asp-action="PlaceOrder"
+              asp-controller="Import"
+              method="post">
+            <input type="hidden" name="returnUrl"
+                   value="@Model.ReturnUrl" />
+            <div class="text-center m-1">
+                <input class="btn btn-primary" type="submit" value="Complete Order" />
+            </div>
+        </form>
+    </div>
 </div>

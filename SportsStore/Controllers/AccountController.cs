@@ -23,7 +23,7 @@ namespace SportsStore.Controllers
        //     signInManager = signInMgr;
        // }
         public AccountController(UserManager<IdentityUser> userMgr,
-        SignInManager<IdentityUser> signInMgr)
+            SignInManager<IdentityUser> signInMgr)
         {
             userManager = userMgr;
             signInManager = signInMgr;
