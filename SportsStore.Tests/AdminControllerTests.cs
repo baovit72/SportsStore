@@ -24,10 +24,10 @@ namespace SportsStore.Tests
                 new Product {ProductID = 3, Name = "P3"},
             }.AsQueryable<Product>());
             // Arrange - create a controller
-            AdminController target = new AdminController(mock.Object);
+            ProductController target = new ProductController(mock.Object);
             // Action
             Product[] result
-            = GetViewModel<IEnumerable<Product>>(target.Index())?.ToArray();
+            = GetViewModel<IEnumerable<Product>>(target.AdminList())?.ToArray();
             // Assert
             Assert.Equal(3, result.Length);
             Assert.Equal("P1", result[0].Name);
@@ -49,7 +49,7 @@ namespace SportsStore.Tests
                 new Product {ProductID = 3, Name = "P3"},
             }.AsQueryable<Product>());
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object);
+            ProductController target = new ProductController(mock.Object);
             // Act
             Product p1 = GetViewModel<Product>(target.Edit(1));
             Product p2 = GetViewModel<Product>(target.Edit(2));
@@ -70,7 +70,7 @@ namespace SportsStore.Tests
                  new Product {ProductID = 3, Name = "P3"},
             }.AsQueryable<Product>());
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object);
+            ProductController target = new ProductController(mock.Object);
             // Act
             Product result = GetViewModel<Product>(target.Edit(4));
             // Assert
@@ -84,7 +84,7 @@ namespace SportsStore.Tests
             // Arrange - create mock temp data
             Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>();
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object)
+            ProductController target = new ProductController(mock.Object)
             {
                 TempData = tempData.Object
             };
@@ -104,7 +104,7 @@ namespace SportsStore.Tests
             // Arrange - create mock repository
             Mock<IProductRepository> mock = new Mock<IProductRepository>();
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object);
+            ProductController target = new ProductController(mock.Object);
             // Arrange - create a product
             Product product = new Product { Name = "Test" };
             // Arrange - add an error to the model state
@@ -129,7 +129,7 @@ namespace SportsStore.Tests
              new Product {ProductID = 3, Name = "P3"},
              }.AsQueryable<Product>());
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object);
+            ProductController target = new ProductController(mock.Object);
             // Act - delete the product
             target.Delete(prod.ProductID);
             // Assert - ensure that the repository delete method was
