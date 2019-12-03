@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Income Report";
+    Layout = "_AdminLayout";
+}
+@model IncomeReport
+
+<link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
+<script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+
+<h1 class="m-4">IncomeReport</h1>
+@if (Model != null)
+{
+<div class="jumbotron">
+    <h1 class="display-4 font-weight-bolder">@Model.CreateDate.ToString("MM/yyyy") Report</h1>
+    <p class="lead">This is the income report of @Model.CreateDate.ToString("MM/yyyy")</p>
+    <hr class="my-4">
+    <p>Sale income: @Model.SaleIncome.ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</p>
+    <p>Import costs: @Model.ImportCost.ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</p>
+    <p>Employees salaries: @Model.EmployeeSalaries.ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</p>
+    @if (Model.CalculateProfit() >= 0)
+    {
+        <h4 class="display-4">Profit: <strong class="text-success">@Model.CalculateProfit().ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</strong></h4>
+    }
+    else
+    {
+        <h4 class="display-4">Profit: <strong class="text-danger font-weight-bolder">@Model.CalculateProfit().ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</strong></h4>
+    }
+</div>
+}
+else
+{
+    <strong class="m-2">No reports created for this month yet.</strong>
+}
+<div class="row justify-content-center">
+    <form method="post" class="form-inline"
+          asp-controller="Report"
+          asp-action="IncomeReport">
+        <div class="form-group mr-sm-2">
+            <label class="control-label mr-sm-2" for="datepicker">Date</label>
+            <input class="form-control mr-sm-2"
+                   id="datepicker"
+                   name="datepicker"
+                   placeholder="MM/YYYY"
+                   type="text"
+                   autocomplete="off" />
+        </div>
+        <div class="form-group mr-sm-2">
+            <button class="btn btn-primary " name="submit" type="submit">Get Report</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $('input[name="datepicker"]').datepicker({
+        format: "mm-yyyy",
+        viewMode: "months",
+        minViewMode: "months"
+    });
+</script>

@@ -51,6 +51,8 @@ namespace SportsStore.Controllers
             if (ModelState.IsValid)
             {
                 order.Lines = cart.Lines.ToArray();
+                order.PlacedDate = DateTime.Now;
+                order.Sum = cart.ComputeTotalValue();
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
             }

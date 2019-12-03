@@ -3,18 +3,84 @@
     ViewBag.Title = "Log In";
     Layout = "_AdminLayout";
 }
-<div class="text-danger" asp-validation-summary="All"></div>
-<form asp-action="Login" asp-controller="Account" method="post">
-    <input type="hidden" asp-for="ReturnUrl" />
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <div><span asp-validation-for="Name" class="text-danger"></span></div>
-        <input asp-for="Name" class="form-control" />
+
+<style>
+    .fill {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        width: auto;
+        height: auto;
+    }
+
+    .form-signin-body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f6f6f6;
+        min-height: 100%;
+        height: 100%;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 30px;
+        margin: auto;
+    }
+
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 15px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+</style>
+
+
+<div class="form-signin-body fill d-flex justify-content-center">
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
+            <form class="form-signin" asp-action="Login" asp-controller="Account" method="post">
+                <h3 class="font-weight-lighter mb-4 text-center">Login</h3>
+
+                <input type="hidden" asp-for="ReturnUrl" />
+
+                <label class="sr-only" asp-for="Name">Username</label>
+                <div><span asp-validation-for="Name" class="text-danger"></span></div>
+                <input asp-for="Name" id="Name" class="form-control" placeholder="Username" />
+
+                <label class="sr-only" asp-for="Password">Password</label>
+                <div><span asp-validation-for="Password" class="text-danger"></span></div>
+                <input asp-for="Password" id="Password" class="form-control" placeholder="Password" />
+
+                <button class="btn btn-primary btn-block" type="submit">LOGIN</button>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <div><span asp-validation-for="Password" class="text-danger"></span></div>
-        <input asp-for="Password" class="form-control" />
-    </div>
-    <button class="btn btn-primary" type="submit">Log In</button>
-</form>
+</div>

@@ -16,6 +16,8 @@ namespace SportsStore.Models
         public ICollection<CartLine> Lines { get; set; }
         [BindNever]
         public bool Shipped { get; set; }
+        [BindNever]
+        public decimal Sum { get; set; }
         // validation attributes
         // data submitted by the user is sent to the server before it is validated, which is known as serverside validation 
         // errors are not shown until after the data has been sent to the server and processed 
@@ -35,6 +37,8 @@ namespace SportsStore.Models
         public string Zip { get; set; }
         [Required(ErrorMessage = "Please enter a country name")]
         public string Country { get; set; }
+        [Required(ErrorMessage = "Need to specify the date this order is placed")]
+        public DateTime PlacedDate { get; set; }
         public bool GiftWrap { get; set; }
     }
 }

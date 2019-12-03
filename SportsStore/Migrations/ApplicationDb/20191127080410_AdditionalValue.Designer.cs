@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsStore.Models;
 
 namespace SportsStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191127080410_AdditionalValue")]
+    partial class AdditionalValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,27 +100,6 @@ namespace SportsStore.Migrations
                     b.HasIndex("SalerInfoWholeSalerInfoID");
 
                     b.ToTable("ImportOrders");
-                });
-
-            modelBuilder.Entity("SportsStore.Models.IncomeReport", b =>
-                {
-                    b.Property<int>("ReportID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<decimal>("EmployeeSalaries");
-
-                    b.Property<decimal>("ImportCost");
-
-                    b.Property<decimal>("Profit");
-
-                    b.Property<decimal>("SaleIncome");
-
-                    b.HasKey("ReportID");
-
-                    b.ToTable("IncomeReports");
                 });
 
             modelBuilder.Entity("SportsStore.Models.Order", b =>

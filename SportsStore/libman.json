@@ -25,6 +25,10 @@
     {
       "library": "popper.js@1.15.0",
       "destination": "wwwroot/lib/popper.js/"
+    },
+    {
+      "library": "bootstrap-datepicker@1.9.0",
+      "destination": "wwwroot/lib/bootstrap-datepicker/"
     }
   ]
 }

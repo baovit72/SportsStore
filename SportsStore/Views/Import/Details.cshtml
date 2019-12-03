@@ -10,7 +10,7 @@
         <tr>
             <th>Quantity</th>
             <th>Item</th>
-            <th class="text-right">Price</th>
+            <th class="text-right">Import Price</th>
             <th class="text-right">Subtotal</th>
         </tr>
     </thead>
@@ -20,9 +20,9 @@
             <tr>
                 <td class="text-center">@line.Quantity</td>
                 <td class="text-left">@line.Product.Name</td>
-                <td class="text-right">@line.Product.Price.ToString("c")</td>
+                <td class="text-right">@line.Product.ImportPrice.ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</td>
                 <td class="text-right">
-                    @((line.Quantity * line.Product.Price).ToString("c"))
+                    @((line.Quantity * line.Product.ImportPrice).ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi")))
                 </td>
                 <td>
                     <form asp-action="RemoveFromOrder" method="post">

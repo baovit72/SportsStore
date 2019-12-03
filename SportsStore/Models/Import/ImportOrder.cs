@@ -20,12 +20,14 @@ namespace SportsStore.Models
         public decimal Sum { get; set; }
         //[Required(ErrorMessage = "Please enter a wholesaler")]
         public WholeSalerInfo SalerInfo { get; set; }
-
+        [Required(ErrorMessage = "Need to specify the date this order is placed")]
+        public DateTime PlacedDate { get; set; }
         public ImportOrder() { }
         public ImportOrder(ImportItems importItems)
         {
             Lines = importItems.Lines.ToArray();
             Sum = importItems.ComputeTotalValue();
+            PlacedDate = DateTime.Now;
             Received = false;
         }
     }

@@ -48,6 +48,7 @@ namespace SportsStore
             services.AddTransient<IOrderRepository, EFOrderRepository>(); 
             services.AddTransient<IImportOrderRepository, EFImportOrderRepository>();
             services.AddTransient<IEmployeeRepository, EFEmployeeRepository>();
+            services.AddTransient<IIncomeReportRepository, EFIncomeReportRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

@@ -29,7 +29,7 @@ else
                 <td class="text-right">@employee.EmployeeID</td>
                 <td>@employee.Name</td>
                 <td class="text-right">@employee.JoinDate.ToString("dd/MM/yyyy")</td>
-                <td class="text-right">@employee.Salary.ToString("c")</td>
+                <td class="text-right">@employee.Salary.ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</td>
                 <td class="text-center">
                     <form asp-action="Delete" method="post">
                         <a asp-action="Edit" class="btn btn-sm btn-warning"

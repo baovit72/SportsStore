@@ -8,6 +8,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\ApplicationDb\20191113071810_Import.cs" />
     <Compile Remove="Migrations\ApplicationDb\20191113071810_Import.Designer.cs" />
+    <Compile Remove="Migrations\ApplicationDb\20191127052856_OrderPlacedDate.cs" />
+    <Compile Remove="Migrations\ApplicationDb\20191127052856_OrderPlacedDate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,10 +19,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.96" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>

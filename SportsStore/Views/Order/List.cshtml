@@ -15,7 +15,9 @@
             <th>Name</th>
             <th>Zip</th>
             <th class="text-center" colspan="2">Details</th>
-            <th class="text-center" >Status</th>
+            <th>Sum</th>
+            <th>Date Placed</th>
+            <th class="text-center">Status</th>
         </tr>
         @foreach (Order o in Model)
         {
@@ -24,6 +26,8 @@
                 <td>@o.Zip</td>
                 <th>Product</th>
                 <th>Quantity</th>
+                <td>@o.Sum.ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</td>
+                <td>@o.PlacedDate.ToString("dd/MM/yyyy")</td>
                 <td class="text-center">
                     @if (!o.Shipped)
                     {

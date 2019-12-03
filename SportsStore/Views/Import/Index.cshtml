@@ -15,6 +15,7 @@
                     <th style="width:10%">Order ID</th>
                     <th colspan="2">Details</th>
                     <th style="width:10%" class="text-right">Sum</th>
+                    <th style="width:10%" class="text-center">Date Placed</th>
                     <th style="width:10%" class="text-center">Delivery Status</th>
                 </tr>
             </thead>
@@ -25,7 +26,8 @@
                         <td class="align-middle">@o.ImportOrderID</td>
                         <th class="align-middle">Product</th>
                         <th class="align-middle">Quantity</th>
-                        <td class="align-middle text-right">@o.Sum.ToString("c")</td>
+                        <td class="align-middle text-right">@o.Sum.ToString("C0", System.Globalization.CultureInfo.CreateSpecificCulture("vi"))</td>
+                        <th class="align-middle">@o.PlacedDate.ToString("dd/MM/yyyy")</th>
                         <td class="text-center">
                             @if (!o.Received)
                             {
